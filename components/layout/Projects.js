@@ -7,9 +7,9 @@ function Projects() {
     return (
         <div className="max-w-screen border-b">
 
-            <div className="flex container border-x items-center">
-                <h2 className="ml-16">Projects</h2>
-                <div className="circle-img-wrapper ml-auto w-1/2 border-l">
+            <div className="flex container border-x items-center flex-col-reverse md:flex-row">
+                <h2 className="md:ml-16 py-3 md:py-0">Projects</h2>
+                <div className="circle-img-wrapper ml-auto w-full md:w-1/2 md:border-l border-b md:border-b-0">
                     <Image 
                         src={CirlcesSvg}
                         className="w-full"

@@ -22,7 +22,7 @@ function Navigation() {
             <button className="text-sm font-bold mx-16 shadow-custom hover:shadow-none hover:translate-x-1 transition-all">
                Contact me 
             </button>
-            <button className="text-sm font-bold hover:bg-black hover:text-white hover:border-black transition-all">
+            <button className="text-sm font-bold shadow-custom hover:shadow-none hover:translate-x-1 transition-all">
                 en
             </button>      
         </nav>

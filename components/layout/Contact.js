@@ -7,9 +7,9 @@ import TransLinesSvg from "../../public/assets/img/trans-arrow-small.svg";
 function Contact() {
     return (
         <div className="max-w-screen">
-            <div className="flex container border-x items-center">
-                <h2 className="ml-16">Contact whit me</h2>
-                <div className="ml-auto w-1/2 border-l">
+            <div className="flex container border-x items-center flex-col-reverse md:flex-row">
+                <h2 className="md:ml-16 py-3 md:py-0">Contact whit me</h2>
+                <div className="ml-auto w-full md:w-1/2 md:border-l border-b md:border-b-0">
                     <Image 
                     src={LinesSvg}
                     className="w-full"
@@ -47,19 +47,10 @@ function Contact() {
                             <textarea rows="4" type="text" id="text-area" name="text-area" />
                         </div>
 
-                        <button type="submit">Submit</button>
+                        <button type="submit" className="shadow-custom hover:shadow-none hover:translate-x-1 duration-150 ">Submit</button>
                     </form>
                 </div>
                 <div className="w-1/2 border-l relative ">
-                    {/* <Link key='linkedin' href='#' className="border rounded-full px-10 py-16 absolute top-48 right-80">
-                        linkedin
-                    </Link>
-                    <Link key='Instagram' href='#' className="border rounded-full px-12 py-20 absolute top-1/3 right-28">
-                        Instagram
-                    </Link>
-                    <Link key='Github' href='#' className="border rounded-full px-12 py-16 absolute top-2/4 right-96">
-                        Github
-                    </Link> */}
                     <div className="flex flex-col items-center gap-6 mt-36">
                         <Link key='linkedin' href='#' className="border rounded-full px-10 py-16 font-bold inline-block w-fit mr-48">
                             linkedin

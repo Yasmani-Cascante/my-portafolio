@@ -10,10 +10,9 @@ module.exports = {
       xl: '1.25rem',
       '2xl': '1.563rem',
       process_index: '6.953rem',
-      // masthead_title: ['6,9375rem', {
-        masthead_title: ['96px', {
-        lineHeight: '109px',
-        letterSpacing: '3px',
+      masthead_title: ['96px', {
+      lineHeight: '109px',
+      letterSpacing: '3px',
       }],
     },
     colors: {
