@@ -128,7 +128,9 @@
     rotate(-45deg)
     translateY(0px);
 }
-
+.responsive-nav {
+  transition: all .3s;
+}
 }
 @layer utilities {
 
