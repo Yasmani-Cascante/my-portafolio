@@ -19,7 +19,7 @@ function About() {
                     </button>
                   
                 </div>
-                <div className="border border-t-0 border-r-0 border-b-0 w-full lg:w-1/2 relative h-[896px] md:h-[1024px] mb-20 lg:mb-0">
+                <div className="border-b lg:border-b-0 lg:border-l w-full lg:w-1/2 relative h-[60vh] md:h-[70vh] lg:h-[80vh] mb-20 lg:mb-0">
                     <Image 
                         src={profilPhoto}
                         layout={"fill"}

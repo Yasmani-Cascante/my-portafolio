@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+import  ThemeSwitch from "../ui/Theme-Switch";
+import Dropdown from "../ui/Dropdown";
+
 function Navigation() {
     function navToggle() {
         var btn = document.getElementById("menuBtn");
@@ -10,7 +13,7 @@ function Navigation() {
         nav.classList.toggle("hidden");
       }
     return (
-        <div className="max-w-screen border-b">
+        <div className="max-w-screen border-b relative">
         <nav className="container border-x flex items-center px-12 lg:pt-10 pb-6 flex-col lg:flex-row ">
             <span className="font-bold mr-auto relative top-9 lg:top-0">
                 y_cascante-martinez
@@ -39,20 +42,26 @@ function Navigation() {
                     ['Projects', '/projects'],
                     ['About me', '/about-me'],
                 ].map(([title, url]) => (
-                    <Link key={title} href={url} className="text-xl lg:text-sm px-3 text-center border-b lg:border-b-0 font-bold text-black hover:text-black-dark py-4 lg:py-0 hover:border-dashed transition-all">
+                    <Link key={title} href={url} className="text-xl lg:text-sm px-6 text-center border-b lg:border-b-0 font-bold text-black hover:text-black-dark py-4 lg:py-0 hover:border-dashed transition-all dark:text-white">
                         {title}
                     </Link>
                 ))}
             <li className="lg:ml-5 pt-10 lg:pt-0 text-center">
-            <button className="text-sm font-bold shadow-custom hover:shadow-none hover:translate-x-1 transition-all mr-16 lg:mx-16">
+              <div className="flex gap-x-8 lg:ml-8 xl:ml-12 gap-y-6 flex-wrap justify-center">
+              {/* <button className="text-sm font-bold shadow-custom hover:shadow-none hover:translate-x-1 transition mr-16 lg:mx-16"> */}
+              <button className="text-sm font-bold shadow-custom hover:shadow-none hover:translate-x-1 transition ">
                Contact me 
             </button>
-            <button className="text-sm font-bold shadow-custom hover:shadow-none hover:translate-x-1 transition-all ">
-                en
-            </button> 
+            <Dropdown />
+            <ThemeSwitch />
+              </div>
+            </li>
+            <li>
             </li>
           </ul>
         </nav>
+       
+
         </div>
     )
 }

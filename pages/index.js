@@ -12,6 +12,8 @@ import WorkProcess from '../components/layout/WorkProcess';
 import Contact from '../components/layout/Contact';
 
 export default function Home() {
+  
+
   return (
     <div>
       <Head>

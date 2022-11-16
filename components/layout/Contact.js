@@ -1,30 +1,31 @@
 import Image from "next/image";
 import Link from "next/link";
+// import LinesSvg from "../../public/assets/img/vertical-lines-small.svg";
 import LinesSvg from "../../public/assets/img/vertical-lines-small.svg";
-import TransLinesSvg from "../../public/assets/img/trans-arrow-small.svg";
+// import TransLinesSvg from "../../public/assets/img/trans-arrow-small.svg";
+// import TransLinesSvg from "../../public/assets/img/trans-arrow-small.svg";
+import DiagonalLinesSvg from "../../public/assets/img/diagonal-lines.svg";
 
 
 function Contact() {
     return (
-        <div className="max-w-screen">
-            <div className="flex container border-x items-center flex-col-reverse md:flex-row">
-                <h2 className="md:ml-16 py-3 md:py-0">Contact whit me</h2>
-                <div className="ml-auto w-full md:w-1/2 md:border-l border-b md:border-b-0">
-                    <Image 
-                    src={LinesSvg}
-                    className="w-full"
-                    alt="illustration of lines"
+        <section className="max-w-screen">
+            <div className="flex container border-x flex-col-reverse md:flex-row lg:items-center">
+                <h2 className="md:ml-16 py-3 md:py-0 text-center md:text-left">Contact whit me</h2>
+                <div className="ml-auto overflow-hidden w-full md:w-1/2 md:border-l border-b md:border-b-0">
+
+                    <LinesSvg 
+                    className="fill-white md:w-[985px] h-full lg:w-[816px]"
                     />
                 </div>
             </div>
             <div className="max-w-screen border-b"></div> 
 
             <div className="container border-x flex justify-between min-h-[60vh] flex-col lg:flex-row">
-                <div className="lg:w-1/2 ">
-                    <Image 
-                    src={TransLinesSvg}
-                    className="w-full"
-                    alt="illustration of lines"
+                <div className="lg:w-1/2 overflow-hidden">
+
+                    <DiagonalLinesSvg 
+                    className="h-[60px] "
                     />
                     <h3 className="mt-20 pl-16 uppercase whitespace-normal">Looking forward <br />
                         to hearing about your project</h3>
@@ -64,7 +65,7 @@ function Contact() {
                     </div>
                 </div> 
             </div>
-        </div>
+        </section>
     )
 }
 

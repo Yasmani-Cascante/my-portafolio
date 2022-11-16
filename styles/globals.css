@@ -11,15 +11,18 @@
 
 @layer base {
   html {
-    background: #efefef;
     padding: 0;
     margin: 0;
     font-family: 'thabit';
     position: relative;
   }
+  body {
+    @apply bg-white-bg dark:bg-black-bg;
+
+  }
   h1,h2,h3 {
     font-family: 'Darker Grotesque', sans-serif;
-    color: rgba(0,0,0, 0.8);
+    @apply text-black dark:text-white;
     font-weight: 700;
   }
   h2 {
@@ -33,10 +36,24 @@
     white-space: nowrap;
   }
   p {
+    @apply font-bold dark:font-normal;
     font-weight: 700;
   }
+  /* img {
+    @apply dark:bg-white-dark; 
+  } */
 }
+
 @layer components {
+  .project-card__header span {
+    @apply text-black-light dark:text-white-dark
+  }
+  svg path:not(.circles-svg path){
+    @apply fill-black dark:fill-white
+  }
+  svg.footer-svg path{
+    @apply fill-white
+  }
   button {
     padding-block: 0.625rem;
     padding-inline: 1.15rem;
@@ -131,9 +148,20 @@
 .responsive-nav {
   transition: all .3s;
 }
+
+/* List Box languages */
+.list-box-lang li {
+  padding-inline: 1.125rem;
+  padding-block: 0.25rem;
+  @apply shadow-custom;
+}
+.list-box-lang li:hover {
+  @apply bg-white-bg;
+  @apply text-black;
+}
 }
 @layer utilities {
-
+  
   .layer {
     position: absolute;
     top: 0;
@@ -142,6 +170,7 @@
     bottom: 0;
     background: url("../public/assets/img/Noise.png");
     mix-blend-mode: overlay;
+    /* mix-blend-mode: soft-light; */
     z-index: -1;
   }
  .mix-darken {
