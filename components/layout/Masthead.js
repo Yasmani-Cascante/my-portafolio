@@ -2,7 +2,7 @@ import Image from "next/image";
 import DiagonalLinesSvg from "../../public/assets/img/diagonal-lines.svg";
 import VerticalLinesSvg from "../../public/assets/img/vertical-lines.svg";
 import ArrowDownSvg from "../../public/assets/img/arrow-down.svg";
-import Ellipse from "../../public/assets/img/Ellipse-blue.svg";
+import Ellipse from "../../public/assets/img/Ellipse.svg";
 
 function Masthead() {
     return (
@@ -26,10 +26,11 @@ function Masthead() {
                     <DiagonalLinesSvg 
                      className="absolute right-0 bottom-0 w-1/2 hidden md:block"
                     />
-            </div>
-            <Ellipse 
-                     className="absolute right-0 bottom-0 "
+                     <Ellipse 
+                     className="absolute right-0 bottom-0 w-[25vw]"
                     />
+            </div>
+          
        </div>
        
     )

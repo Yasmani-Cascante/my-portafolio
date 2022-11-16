@@ -18,7 +18,10 @@ module.exports = {
         bg: '#222222'
       },
       red: '#ef4444',
-      blue: '#004DBA'
+      blue: {
+        light: '#317BCD',
+        DEFAULT: '#004DBA'
+      }
     },
     screens: {
       'sm': '640px',

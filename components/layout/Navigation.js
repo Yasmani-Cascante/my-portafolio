@@ -14,7 +14,7 @@ function Navigation() {
       }
     return (
         <div className="max-w-screen border-b relative">
-        <nav className="container border-x flex items-center px-12 lg:pt-10 pb-6 flex-col lg:flex-row ">
+        <nav className="container border-x flex items-center px-12 lg:pt-10 pb-6 flex-col lg:flex-row z-10 relative">
             <span className="font-bold mr-auto relative top-9 lg:top-0">
                 y_cascante-martinez
             </span>  

@@ -169,8 +169,8 @@
     right: 0;
     bottom: 0;
     background: url("../public/assets/img/Noise.png");
-    mix-blend-mode: overlay;
-    /* mix-blend-mode: soft-light; */
+    /* mix-blend-mode: overlay; */
+    mix-blend-mode: soft-light;
     z-index: -1;
   }
  .mix-darken {
