@@ -15,6 +15,7 @@
     margin: 0;
     font-family: 'thabit';
     position: relative;
+    cursor: none;
   }
   body {
     @apply bg-white-bg dark:bg-black-bg;
@@ -159,9 +160,78 @@
   @apply bg-white-bg;
   @apply text-black;
 }
+
+.drag-area {
+  opacity: 0.2;
+  /* background: red; */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  /* width: 300px;
+  height: 300px;
+  border-radius: 30px;
+  top: calc(50% - 150px);
+  left: calc(50% - 150px); */
 }
+
+.draggable {
+  /* background: white;
+  border-radius: 30px;
+  width: 150px;
+  height: 150px; */
+  position: absolute ;
+   /* top: calc(50% - 150px / 2); */
+  /* left: calc(50% - 150px / 2); */
+}
+
+.project-image-container {
+
+}
+.my-cursor {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    /* background-color: rgb(238, 130, 31); */
+    /* background-color: #317BCD; */
+    /* @apply bg-blue; */
+    border: 2px solid #fefefe;
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    pointer-events: none;
+    z-index: 9999;
+    transition: none;
+    /* transition-property: background-color, opacity, transform, mix-blend-mode; */
+}
+
+}
+
 @layer utilities {
-  
+  /* a:hover,
+  button:hover {
+    cursor: none;
+  } */
+
+  .about-img-wrapper {
+      overflow: hidden;
+    
+  }
+  .sepia {
+    /* filter: grayscale(100%) sepia(20%) brightness(80%); */
+    filter: grayscale(100%) brightness(80%);
+    /* transition: scale 3s ease-in-out; */
+  }
+  .masked {
+    clip-path: circle(25% at 50% 50%);
+    transition: opacity 0.3s ease-in-out;
+                /* scale 3s ease-in-out; */
+    opacity: 0;
+  }
   .layer {
     position: absolute;
     top: 0;
@@ -176,5 +246,63 @@
  .mix-darken {
   mix-blend-mode: darken;
  }
+
+/* loading form btn */
+.lds-ellipsis {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 80px;
+  height: 100%;
+  margin: 0 auto;
+}
+.lds-ellipsis div {
+  position: absolute;
+  /* top: 33px; */
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
 }
 

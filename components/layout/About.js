@@ -1,12 +1,65 @@
 import Image from "next/image";
-import profilPhoto from "../../public/assets/img/Profil-photo.jpg";
+import { useEffect, useState, useRef } from "react";
+// import profilPhoto from "../../public/assets/img/Profil-photo.jpg";
+import profilPhotoColor from "../../public/assets/img/about-color.jpg";
+import profilPhoto from "../../public/assets/img/about.png";
 
-function About() {
+function About({hoverDispatch}) {
+
+    // const imgEnter = () => {
+    //     changeState = true
+    //     console.log('...', "imgEnter");
+
+    // }
+    // const imgLeave = () => { 
+    //     changeState = false
+    //     console.log('...', "imgLeave");
+    // }
+    const ref = useRef(null);
+
+    const [clipMaskRadius, setClipMaskRadius] = useState(0);
+    const [maskOpacity, setMaskOpacity] = useState(0);
+    const [clipMask, setClipMask] = useState({ x: 0, y: 0 });
+
+    
+    useEffect(() => {
+        function getCoordinates(mouse) {
+          const imagePosition = {
+            posX: ref.current.offsetLeft,
+            posY: ref.current.offsetTop,
+          };
+    
+          const posX = mouse.pageX - imagePosition.posX;
+          const posY = mouse.pageY - imagePosition.posY;
+    
+          setClipMask({
+            x: (posX / ref.current.clientWidth) * 100,
+            y: (posY / ref.current.clientHeight) * 100,
+          });
+        
+        }
+
+        ref.current.addEventListener("mousemove", (mouse) => {
+          window.requestAnimationFrame(() => {
+            getCoordinates(mouse);
+          });
+        });
+      }, []);
+
+
+    // const MouseEnter = (e) => {
+    //     setClipMaskRadius(25)
+    // }
+    // const MouseLeave = (e) => {
+    //     setClipMaskRadius(0)
+    // }
+    
+
     return (
         <section className="max-w-screen border-b">
             <div className="container border-x flex flex-col-reverse lg:flex-row justify-between items-center pb-20 lg:pb-0">
                 <div className="flex flex-col max-w-lg lg:max-w-md px-8 xl:ml-16">
-                    <h2>Hello ;) <br /> My name is <br /> Yasmani</h2>
+                    <h2 className="contents">Hello ;) <br /> My name is <br /> Yasmani</h2>
                     <p className="my-10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, nihil. 
                         Nam consectetur, impedit reprehenderit commodi beatae earum minus assumenda animi! 
                         Doloremque assumenda repellendus quia fuga at ipsam. Iste, modi amet.</p>
@@ -19,14 +72,49 @@ function About() {
                     </button>
                   
                 </div>
-                <div className="border-b lg:border-b-0 lg:border-l w-full lg:w-1/2 relative h-[60vh] md:h-[70vh] lg:h-[80vh] mb-20 lg:mb-0">
-                    <Image 
-                        src={profilPhoto}
+                <div 
+                className="about-img-wrapper border-b lg:border-b-0 lg:border-l w-full lg:w-1/2 relative h-[60vh] md:h-[70vh] lg:h-[80vh] mb-20 lg:mb-0"
+                ref={ref}
+                onMouseEnter={() => {
+                    setClipMaskRadius(25);
+                    setMaskOpacity(1)
+                  }}
+                onMouseLeave={() => {
+                    setClipMaskRadius(0);
+                    setMaskOpacity(0)
+
+                  }}
+                >
+                <Image
+                        src={profilPhotoColor}
                         layout={"fill"}
                         objectFit="cover"
+                        // onMouseEnter={MouseEnter} 
+                        // onMouseLeave={imgHover} 
                         // height={896}
                         alt="profile picture of a person"
+                        className=" sepia"
+                        // style={{ scale:`${clipMaskRadius ? '1.05' : '1' }`}}
                         />
+                    <Image
+                        id="AboutImg"
+                        src={profilPhotoColor}
+                        layout={"fill"}
+                        objectFit="cover"
+                        // onMouseEnter={hoverDispatch}       
+                        // onMouseLeave={hoverDispatch} 
+                        // onMouseEnter={MouseEnter}   
+                        // onMouseLeave={MouseLeave} 
+                        // height={896}
+                        alt="profile picture of a person"
+                        className="masked"
+                        // style={{clipPath: `circle(${clipMaskRadius}% at ${clipMask.x }% ${clipMask.y}%`}}
+                        style={{clipPath: `circle(${clipMaskRadius}% at ${clipMask.x }% ${clipMask.y}%`,
+                        opacity: `${maskOpacity}`,
+                        // scale:`${clipMaskRadius ? '1.05' : '1' }`
+                    }}
+                        />
+                     
                 </div> 
             </div>
         </section>

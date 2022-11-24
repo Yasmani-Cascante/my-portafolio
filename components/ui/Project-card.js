@@ -1,21 +1,40 @@
 import Image from "next/image";
 import Link from "next/link";
 
+function Project_card({project}) {
 
-function Project_card() {
+    // Collecting Data
+    const project_title = project.properties.Name.title[0].plain_text
+    const project_description = project.properties.Description.rich_text[0].plain_text
+    const project_tags = project.properties.Tags.multi_select;
+    const date = project.properties.Date.date.start;
+    const options = {
+        year: "numeric",
+        month:"long",
+        day:"numeric"
+    };
+    const project_date = new Date(date).toLocaleDateString('en-US', options);
+    const project_files = project.properties.Files.files;
+    let project_files_url = null;                                                                              
+        if (project_files.length > 0) {
+         project_files_url = project_files[0].file.url;
+        }
+
     return (
         <div className="project-card transition-all duration-300 p-8 md:p-8 md:py-16 lg:p-16 border border-t-0 border-r-0">
             <div className="project-card__header flex lg:items-end flex-col lg:flex-row">
-                <h3>Project title</h3>
-                <span className="lg:ml-auto font-bold mt-4">March 12, 2021</span>
+                <h3> { project_title } </h3>
+                <span className="lg:ml-auto font-bold mt-4">{ project_date }</span>
             </div>
 
-            <p className="my-12">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, nihil. 
-                Nam consectetur, impedit reprehenderit commodi beatae earum minus assumenda animi! 
-                Doloremque assumenda repellendus quia fuga at ipsam. Iste, modi amet.</p>
+            <p className="my-12"> { project_description } </p>
             
             <div className="project-card__footer flex pt-4 items-center">
-                <span className="font-bold">Design, Development</span>
+                
+                    { project_tags.map(tag => (
+                        <span className="font-bold mr-4">{tag.name}</span>
+                    ))}
+                    
                 <Link  href="#" className="group poject-card__footer-link transition-all ml-auto px-4 py-3 font-bold flex items-center w-fit hover:bg-black hover:text-white dark:hover:bg-blue">
                     <span className="uppercase whitespace-nowrap">Learn more</span>
                     <svg className="ml-4" width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +42,24 @@ function Project_card() {
                     </svg>
                 </Link>
             </div>
-           
+            {/* <div className="project-image-container absolute h-[200px] w-[200px] ">
+            {project_files_url?
+                 <Image 
+                 alt="Decorative line"
+                 width={500}
+                 height={500}
+                 priority={true}
+                 src={project_files_url}
+                 />  
+                 : null}
+            </div>    */}
+                
+            {/* <Image 
+            alt="Decorative line"
+            className="absolute top-0 right-0 left-[10vw] z-0 h-full"
+            src={project_files_url}
+            /> */}
+          
         </div>
     )
 }

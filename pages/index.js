@@ -7,12 +7,48 @@ import Navigation from '../components/layout/Navigation';
 import Masthead from '../components/layout/Masthead';
 import Footer from '../components/layout/Footer';
 import About from '../components/layout/About';
-import Projects from '../components/layout/Projects';
+import ProjectsList from '../components/layout/ProjectsList';
 import WorkProcess from '../components/layout/WorkProcess';
 import Contact from '../components/layout/Contact';
 
-export default function Home() {
+import { Client } from '@notionhq/client';
+import Cursor from '../components/ui/Cursor';
+import {useState} from 'react';
+import { motion } from "framer-motion";
+
+
+export default function Home({projects}) {
+
+  const [cursorHide, setCursorHide] = useState(false);
+
+  const hoverDispatch = (e) => {
+    const mouseEvent = e.type;
+    // mouseenter
+    // mouseleave
+    // console.log('Aqui!', mouseEvent);
+    if(mouseEvent == 'mouseenter') {
+      setCursorHide(true)
+    // console.log('Aqui!', cursorHide);
+    } else {
+      setCursorHide(false)
+    }
+  }
+
   
+// const variants = {
+//   hide: {
+//     display: 'none',
+//     width: 200,
+//     height: 200,
+//     opacity: 0
+//   },
+//   show: {
+//     display: 'block',
+//     width: 30,
+//     height: 30,
+//     opacity: 1
+//   }
+// }
 
   return (
     <div>
@@ -28,14 +64,37 @@ export default function Home() {
       </header>
 
       <main>
-      <About />
-      <Projects />
+      {/* <About /> */}
+      <About hoverDispatch ={hoverDispatch}/> 
+      <ProjectsList projects={projects} />
       <WorkProcess />
       <Contact />
       </main>
 
       <div className='layer'></div>
       <Footer />
+      {/* <motion.div
+       variants={variants}
+       animate={cursorVariant}
+       transition={{ delay: .3, duration: 1 }}
+      > */}
+        <Cursor />
+      {/* </motion.div> */}
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const notion = new Client({ auth: process.env.NOTION_API_KEY });
+  const databaseId = process.env.NOTION_DATABASE_ID;
+
+  const response = await notion.databases.query({
+    database_id: databaseId
+  });
+  
+  return {
+    props: {
+      projects: response.results
+    }
+  }
 }

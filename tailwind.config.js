@@ -21,7 +21,8 @@ module.exports = {
       blue: {
         light: '#317BCD',
         DEFAULT: '#004DBA'
-      }
+      },
+      code: 'green',
     },
     screens: {
       'sm': '640px',
