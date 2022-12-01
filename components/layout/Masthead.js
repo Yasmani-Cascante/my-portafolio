@@ -27,7 +27,7 @@ function Masthead() {
                     </a>    
                 </div>
                     <DiagonalLinesSvg 
-                     className="absolute right-0 bottom-0 w-1/2 hidden md:block"
+                     className="absolute right-0 bottom-0 w-1/2 hidden lg:block"
                     />
                      {/* <Ellipse 
                      className="absolute right-0 bottom-0 w-[25vw]"

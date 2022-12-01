@@ -14,7 +14,7 @@ function WorkProcess() {
                     alt="illustration of lines"
                     /> */}
                     <DiagonalLinesSvg 
-                    className="h-[119px]"
+                    className="lg:h-[119px]"
                     />
                 </div>
             </div>

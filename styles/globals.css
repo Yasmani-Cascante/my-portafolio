@@ -27,7 +27,7 @@
     font-weight: 700;
   }
   h2 {
-    font-size: 3.5rem;
+    font-size: 3.75rem;
     line-height: 70.06px;
   }
   h3 {
@@ -98,8 +98,33 @@
   }
 
   /* HAMBURGER MENU */
+  .menu-hamburger {
+    position: relative;
+    /* right: 1rem; */
+    z-index: 100;
+    width: 34px;
+    display: block;
+    cursor: pointer;
+  }
+  .menu-hamburger span{
+    display: block;
+    height: 2px;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: all .3s;  
+  }
+  .mostrar .bar-middle{
+    transform: translate(-8px);
+ }
+ .mostrar .bar-top{
+  transform: translate(8px);
+}
+.mostrar .bar-bottom{
+  transform: translate(8px);
+}
 
-.hamburger {
+
+/* .hamburger {
   cursor: pointer;
   width: 48px;
   height: 48px;
@@ -148,7 +173,7 @@
 }
 .responsive-nav {
   transition: all .3s;
-}
+} */
 
 /* List Box languages */
 .list-box-lang li {
@@ -205,7 +230,7 @@
     background-repeat: no-repeat !important;
     pointer-events: none;
     z-index: 9999;
-    transition: none;
+    /* transition: none; */
     /* transition-property: background-color, opacity, transform, mix-blend-mode; */
 }
 

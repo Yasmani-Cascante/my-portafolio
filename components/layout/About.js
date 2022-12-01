@@ -73,7 +73,7 @@ function About({hoverDispatch}) {
                   
                 </div>
                 <div 
-                className="about-img-wrapper border-b lg:border-b-0 lg:border-l w-full lg:w-1/2 relative h-[60vh] md:h-[70vh] lg:h-[80vh] mb-20 lg:mb-0"
+                className="about-img-wrapper border-b lg:border-b-0 lg:border-l w-full lg:w-1/2 relative h-[70vh] lg:h-[80vh] mb-20 lg:mb-0"
                 ref={ref}
                 onMouseEnter={() => {
                     setClipMaskRadius(25);

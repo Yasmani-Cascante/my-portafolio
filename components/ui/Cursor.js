@@ -9,7 +9,7 @@ const isMobile = () => {
 
 const Cursor = ({}) => {
 
-
+    // Abort if we are in responsive mode 
     if (typeof navigator !== "undefined" && isMobile()) return null;
 
     // Mouse Position
@@ -50,7 +50,12 @@ const Cursor = ({}) => {
        const aboutImg = document.querySelector('#AboutImg');
        aboutImg.addEventListener("mouseover", () => setCursorVariant('hide'))
        aboutImg.addEventListener("mouseout", () => setCursorVariant('initial'))
-        
+
+        // Hamburger Menu hover Handle
+       const hamburgerMenu = document.querySelector('.menu-hamburger');
+       hamburgerMenu.addEventListener("mouseover", () => setCursorVariant('hoverLink'))
+       hamburgerMenu.addEventListener("mouseout", () => setCursorVariant('initial'))
+       
         // Click Event Listeners
         document.addEventListener("mousedown", () => setCursorVariant('hoverLink') );
         document.addEventListener("mouseup", () => setCursorVariant('initial'));
@@ -71,22 +76,36 @@ const Cursor = ({}) => {
             
         },
         hoverLink: {
-            height: 72,
-            width: 72,
-            x:mousePosition.x - 36,
-            y:mousePosition.y - 36,
+            // height: 72,
+            // width: 72,
+            scale: 2.2,
+            x:mousePosition.x - 15,
+            y:mousePosition.y - 15,
             backgroundColor: '#fefefe',
             mixBlendMode: "difference",
-
-            // backgroundColor: "rgb(238, 130, 31)"
+            transition: {
+                duration: 0,
+                scale: {
+                    duration: 0.15
+                }
+            }
         },
         big: {
-            height: 200,
-            width: 200,
-            x:mousePosition.x - 75,
-            y:mousePosition.y - 75,
+            // scale:5,
+            // x:mousePosition.x - 15,
+            // y:mousePosition.y - 15,
+            scale:7,
+            x:mousePosition.x - 15,
+            y:mousePosition.y - 15,
             backgroundColor: "#fefefe",
-            mixBlendMode: "difference"
+            mixBlendMode: "difference",
+            // transition: {
+            //     duration: 0,
+            //     scale: {
+            //         duration: 0.15
+            //     }
+            // }
+
         },
         hide: {
             x:mousePosition.x - 150,
@@ -102,9 +121,18 @@ const Cursor = ({}) => {
         <motion.div
          variants={variants}
          animate={cursorVariant}
-        // style={{ left: `${mousePosition.x}px`, top: `${mousePosition.y}px`, background:`url(${project_files_url})`  }}
-        // style={{ left: `${mousePosition.x}px`, top: `${mousePosition.y}px`  }}
-        className="my-cursor"
+        //  transition={{ ease: "linear", duration: 0 }}
+         transition={{
+            duration: 0.3,
+            x: {
+                duration: 0 
+            },
+            y: {
+                duration: 0 
+            },
+            // ease: "linear"
+         }}
+         className="my-cursor"
         />
     )
  

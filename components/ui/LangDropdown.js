@@ -23,7 +23,7 @@ export default function MyListbox() {
         <Listbox.Button
 
         className={({ selected }) =>
-                    ` font-bold border-0 transition-all inline-flex w-full items-center
+                    `font-bold border-0 transition-all inline-flex w-full items-center
                      ${selected ? 'bg-blue shadow-none' : 'text-gray-900'
                     }`
                   }
