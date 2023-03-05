@@ -12,7 +12,7 @@ import WorkProcess from '../components/layout/WorkProcess';
 import Contact from '../components/layout/Contact';
 
 import { Client } from '@notionhq/client';
-// import Cursor from '../components/ui/Cursor';
+import Cursor from '../components/ui/Cursor';
 import {useState} from 'react';
 import { motion } from "framer-motion";
 
@@ -65,7 +65,7 @@ export default function Home({projects}) {
 
       <main>
       {/* <About /> */}
-      <About hoverDispatch={hoverDispatch}/> 
+      <About hoverDispatch ={hoverDispatch}/> 
       <ProjectsList projects={projects} />
       <WorkProcess />
       <Contact />
@@ -78,7 +78,7 @@ export default function Home({projects}) {
        animate={cursorVariant}
        transition={{ delay: .3, duration: 1 }}
       > */}
-        {/* <Cursor /> */}
+        <Cursor />
       {/* </motion.div> */}
     </div>
   )
@@ -91,8 +91,7 @@ export async function getStaticProps() {
   const response = await notion.databases.query({
     database_id: databaseId
   });
-  console.log('response.results',response.results);
-
+  
   return {
     props: {
       projects: response.results

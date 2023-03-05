@@ -4,16 +4,19 @@ module.exports = {
   content: [ "./pages/**/*.{js,ts,jsx,tsx}",    
   "./components/**/*.{js,ts,jsx,tsx}" ],
   theme: {
+
     colors: {
       white: {
         DEFAULT: 'rgba(255,255,255, 1)',
         dark: 'rgba(255,255,255, 0.8)',
         bg: '#efefef', 
       },
-       yellow: '#f99a45 ',
+      gray: '#e5e7eb',
+      yellow: '#f99a45 ',
       'black': {
+        lighten: 'rgba(0,0,0, 0.075)',
         light: 'rgba(0,0,0, 0.5)',
-        DEFAULT: 'rgba(0,0,0, 0.8)',
+        DEFAULT: 'rgba(0,0,0, 0.9)',
         dark: 'rgba(0,0,0, 1)',
         bg: '#222222'
       },
@@ -23,7 +26,9 @@ module.exports = {
         DEFAULT: '#004DBA'
       },
       code: 'green',
+      secondary: 'cornflowerblue',
     },
+
     screens: {
       'sm': '640px',
       'md': '768px',
@@ -33,17 +38,20 @@ module.exports = {
       // '2xl': '1536px',
       '2xl': '1420px',
     },
+
     container: {
       center: true,
       maxWidth: {
         '1/2': '50%',
       }
     },
+    
     extend: {
       boxShadow: {
         'custom': '4px 4px 0px rgba(0, 0, 0, 1)',
       }
     },
   },
+
   plugins: [],
 }

@@ -33,7 +33,7 @@ const contactForm = () => {
         ref={form}
         action="" 
         method="post" 
-        className="px-8 pt-16 md:p-16 flex flex-col"
+        className="px-8 pt-64 md:p-16 flex flex-col mt-20 md:mt-80"
         onSubmit={sendEmail}
         >
             <div className="field flex flex-col ">

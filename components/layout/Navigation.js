@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import  ThemeSwitch from "../ui/Theme-Switch";
-import Dropdown from "../ui/LangDropdown";
+import LangDropdown from "../ui/LangDropdown";
 import useWindowDimensions from "../hooks/UseWindowDimensions"
 import { motion, useCycle } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -113,9 +113,9 @@ function Navigation() {
                     ['About me', '/about-me'],
                 ].map(([title, url]) => (
                   <motion.li 
+                  key={title}
                   >
                     <Link 
-                    key={title}
                     href={url} 
                     className="block text-xl lg:text-sm px-6 text-center border-b lg:border-b-0 font-bold text-black hover:text-black-dark py-4 lg:py-0 hover:border-dashed transition-all dark:text-white"
                     
@@ -129,10 +129,10 @@ function Navigation() {
             <motion.li className="lg:ml-5 pt-10 lg:pt-0 text-center">
               <div className="flex gap-x-8 lg:ml-8 xl:ml-12 gap-y-6 flex-wrap justify-center">
               {/* <button className="text-sm font-bold shadow-custom hover:shadow-none hover:translate-x-1 transition mr-16 lg:mx-16"> */}
-              <button className="text-sm font-bold shadow-custom hover:shadow-none hover:translate-x-1 transition ">
+              <button className="btn-primary text-sm font-bold shadow-custom hover:shadow-none hover:translate-x-1 transition ">
                Contact me 
             </button>
-            <Dropdown />
+            <LangDropdown />
             <ThemeSwitch />
               </div>
             </motion.li>

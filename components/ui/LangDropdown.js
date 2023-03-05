@@ -2,14 +2,14 @@ import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
-const people = [
+const Langs = [
   {id:1 , name: 'en' },
   {id:2 , name: 'fr' },
   {id:3 , name: 'es' },
 ]
 
 export default function MyListbox() {
-  const [selectedLang, setselectedLang] = useState(people[0])
+  const [selectedLang, setselectedLang] = useState(Langs[0])
 
   return (
     <div className='relative inline-block'>
@@ -57,7 +57,7 @@ export default function MyListbox() {
        bg-white hover:cursor-pointer border"
        
       >
-        {people.map((person) => (
+        {Langs.map((person) => (
         /* Use the `selected` state to conditionally style the selected option. */
           <Listbox.Option key={person.id} value={person} as={Fragment}
             // className="px-[1.2rem] py-3 hover:cursor-pointer"
