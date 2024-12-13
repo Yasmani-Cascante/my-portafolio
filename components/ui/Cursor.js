@@ -13,115 +13,202 @@ import Test  from "../../public/assets/img/Thumbnails/Test.png";
 import ProjectTitle  from "../../public/assets/img/Thumbnails/ProjectTitle.png";
 
 
-// we will not render <Cursor/> on mobile/touch devices.
-const isMobile = () => {
-    const ua = navigator.userAgent;
-    return /Android|Mobi/i.test(ua);
-};
-
 
 const Cursor = ({revealProjectThumb}) => {
 
     // Abort if we are in responsive mode 
-    if (typeof navigator !== "undefined" && isMobile()) return null;
+    // if (typeof navigator !== "undefined" && isMobile()) return null;
 
     // Mouse Position
-    const [mousePosition, setMousePosition] = useState({
-        x: "",
-        y: "",
-      });
-
+    const [mousePosition, setMousePosition] = useState({ x: "", y: "" });
     // const [linkHovered, setLinkHovered] = useState(false);
     const [cursorVariant, setCursorVariant] = useState('initial');
     // const [viewProjectVariant, setviewProjectVariant] = useState('hidde');
     const [cursorHoverProject, setCursorHoverProject] = useState('hidde');
     const [projectThumb, setProjectThumb] = useState(null);
 
+    
+    // Función para detectar dispositivos móviles
+    // we will not render <Cursor/> on mobile/touch devices.
+    const isMobile = () => {
+        if (typeof navigator === "undefined") return false;
+        const ua = navigator.userAgent;
+        return /Android|Mobi/i.test(ua);
+    };
+
+    // Si es móvil, retornamos null después de los hooks
+    if (isMobile()) return null;
+
     const handleMouseMove = (e) => {
         setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
+            x: e.clientX,
+            y: e.clientY,
         });
     };
 
     
-    useEffect(() => {
-        window.addEventListener("mousemove", handleMouseMove);
-        handleHoverEvents();
-        return () => {
-        window.removeEventListener("mousemove", handleMouseMove);
-        };
-    }, []);
+    // useEffect(() => {
+    //     window.addEventListener("mousemove", handleMouseMove);
+    //     handleHoverEvents();
+    //     return () => {
+    //     window.removeEventListener("mousemove", handleMouseMove);
+    //     };
+    // }, []);
     
 
     
     const handleHoverEvents = () => {
 
+        const elements = {
+            links: document.querySelectorAll("a"),
+            buttons: document.querySelectorAll("button"),
+            projectLink: document.querySelector("#projectLink"),
+            aboutImg: document.querySelector('#AboutImg'),
+            hamburgerMenu: document.querySelector('.menu-hamburger'),
+            h1s: document.querySelectorAll("h1"),
+            h2s: document.querySelectorAll("h2"),
+            smile: document.querySelector('.smile'),
+            projectCards: document.querySelectorAll(".proyect-card--wrapper")
+        };
+
+        // Limpieza de event listeners
+        const cleanup = new Set();
+
+        // Links & buttons hover handle
+        elements.links.forEach(el => {
+            const mouseOver = () => setCursorVariant('hoverLink');
+            const mouseOut = () => setCursorVariant('initial');
+            el.addEventListener("mouseover", mouseOver);
+            el.addEventListener("mouseout", mouseOut);
+            cleanup.add(() => {
+                el.removeEventListener("mouseover", mouseOver);
+                el.removeEventListener("mouseout", mouseOut);
+            });
+        });
         // Links & buttons hover Handle
-        document.querySelectorAll("a").forEach(el => {
-            el.addEventListener("mouseover", () => setCursorVariant('hoverLink'));
-            el.addEventListener("mouseout", () => setCursorVariant('initial'));
+        // document.querySelectorAll("a").forEach(el => {
+        //     el.addEventListener("mouseover", () => setCursorVariant('hoverLink'));
+        //     el.addEventListener("mouseout", () => setCursorVariant('initial'));
+        // });
+        elements.buttons.forEach(el => {
+            const mouseOver = () => setCursorVariant('hide');
+            const mouseOut = () => setCursorVariant('initial');
+            el.addEventListener("mouseover", mouseOver);
+            el.addEventListener("mouseout", mouseOut);
+            cleanup.add(() => {
+                el.removeEventListener("mouseover", mouseOver);
+                el.removeEventListener("mouseout", mouseOut);
+            });
         });
-        document.querySelectorAll("button").forEach(el => {
-            el.addEventListener("mouseover", () => setCursorVariant('hide'));
-            el.addEventListener("mouseout", () => setCursorVariant('initial'));
-        });
-        const projectLink = document.querySelector("#projectLink");
-        projectLink.addEventListener("mouseover", () => setCursorVariant('hide'));
-        projectLink.addEventListener("mouseout", () => setCursorVariant('initial'));
+        // document.querySelectorAll("button").forEach(el => {
+        //     el.addEventListener("mouseover", () => setCursorVariant('hide'));
+        //     el.addEventListener("mouseout", () => setCursorVariant('initial'));
+        // });
+
+        // const projectLink = document.querySelector("#projectLink");
+        elements.projectLink.addEventListener("mouseover", () => setCursorVariant('hide'));
+        elements.projectLink.addEventListener("mouseout", () => setCursorVariant('initial'));
+        // projectLink.addEventListener("mouseover", () => setCursorVariant('hide'));
+        // projectLink.addEventListener("mouseout", () => setCursorVariant('initial'));
        
         // About Photo Cursor hidden
-       const aboutImg = document.querySelector('#AboutImg');
-       aboutImg.addEventListener("mouseover", () => setCursorVariant('hide'))
-       aboutImg.addEventListener("mouseout", () => setCursorVariant('initial'))
+        //    const aboutImg = document.querySelector('#AboutImg');
+       elements.aboutImg.addEventListener("mouseover", () => setCursorVariant('hide'));
+       elements.aboutImg.addEventListener("mouseout", () => setCursorVariant('initial'));
+       //    aboutImg.addEventListener("mouseover", () => setCursorVariant('hide'))
+       //    aboutImg.addEventListener("mouseout", () => setCursorVariant('initial'))
 
         // Hamburger Menu hover Handle
-       const hamburgerMenu = document.querySelector('.menu-hamburger');
-       hamburgerMenu.addEventListener("mouseover", () => setCursorVariant('hoverLink'))
-       hamburgerMenu.addEventListener("mouseout", () => setCursorVariant('initial'))
+       //    const hamburgerMenu = document.querySelector('.menu-hamburger');
+       elements.hamburgerMenu.addEventListener("mouseover", () => setCursorVariant('hoverLink'))
+       elements.hamburgerMenu.addEventListener("mouseout", () => setCursorVariant('initial'))
        
         // Click Event Listeners
         document.addEventListener("mousedown", () => setCursorVariant('click') );
         document.addEventListener("mouseup", () => setCursorVariant('initial'));
         
         // Headers hover Handle
-        document.querySelectorAll("h1").forEach(el => {
-            el.addEventListener("mouseover", () => setCursorVariant('biggest'));
-            el.addEventListener("mouseout", () => setCursorVariant('initial'));
-        });
-        document.querySelectorAll("h2").forEach(el => {
-            el.addEventListener("mouseover", () => setCursorVariant('big'));
-            el.addEventListener("mouseout", () => setCursorVariant('initial'));
-        });
-        const smile = document.querySelector('.smile');
-            smile.addEventListener("mouseover", () => setCursorVariant('big'));
-            smile.addEventListener("mouseout", () => setCursorVariant('initial'));
-    //     document.querySelectorAll("div.project-card__header > h3, .poject-card__footer-link").forEach(el => {
-    //         el.addEventListener("mouseover", () => setCursorVariant('hoverLink2'))
-    //         el.addEventListener("mouseout", () => setCursorVariant('initial'))
-    //         el.addEventListener("mouseover", () => setCursorHoverProject('show'));
-    //         el.addEventListener("mouseout", () => setCursorHoverProject('hidde'));
-    //    });
-    //    document.querySelectorAll(".project-card").forEach(el => {
-    //     el.addEventListener("mouseover", () =>{ 
-    //                                             setCursorVariant('hoverProyect')});
-    //     el.addEventListener("mouseout", () => {
-    //                                             setCursorVariant('initial') });
-    //     });
-        document.querySelectorAll(".proyect-card--wrapper").forEach(el => {
-            el.addEventListener("mouseover", () =>{ 
-                                                    setCursorVariant('hoverProyect')
-                                                    // setviewProjectVariant('show')
-                                                });
-            el.addEventListener("mouseout", () => {
-                                                    setCursorVariant('initial')
-                                                    // setviewProjectVariant('hidde')
-                                                 });
+        elements.h1s.forEach(el => {
+            const mouseOver = () => setCursorVariant('biggest');
+            const mouseOut = () => setCursorVariant('initial');
+            el.addEventListener("mouseover", mouseOver);
+            el.addEventListener("mouseout", mouseOut);
+            cleanup.add(() => {
+                el.removeEventListener("mouseover", mouseOver);
+                el.removeEventListener("mouseout", mouseOut);
             });
-
+        });
+                // document.querySelectorAll("h1").forEach(el => {
+        //     el.addEventListener("mouseover", () => setCursorVariant('biggest'));
+        //     el.addEventListener("mouseout", () => setCursorVariant('initial'));
+        // });
+        elements.h2s.forEach(el => {
+            const mouseOver = () => setCursorVariant('big');
+            const mouseOut = () => setCursorVariant('initial');
+            el.addEventListener("mouseover", mouseOver);
+            el.addEventListener("mouseout", mouseOut);
+            cleanup.add(() => {
+                el.removeEventListener("mouseover", mouseOver);
+                el.removeEventListener("mouseout", mouseOut);
+            });
+        });
+        // document.querySelectorAll("h2").forEach(el => {
+        //     el.addEventListener("mouseover", () => setCursorVariant('big'));
+        //     el.addEventListener("mouseout", () => setCursorVariant('initial'));
+        // });
+        
+        // const smile = document.querySelector('.smile');
+            elements.smile.addEventListener("mouseover", () => setCursorVariant('big'));
+            elements.smile.addEventListener("mouseout", () => setCursorVariant('initial'));
+     //     document.querySelectorAll("div.project-card__header > h3, .poject-card__footer-link").forEach(el => {
+     //         el.addEventListener("mouseover", () => setCursorVariant('hoverLink2'))
+     //         el.addEventListener("mouseout", () => setCursorVariant('initial'))
+     //          el.addEventListener("mouseover", () => setCursorHoverProject('show'));
+     //         el.addEventListener("mouseout", () => setCursorHoverProject('hidde'));
+     //    });
+     //    document.querySelectorAll(".project-card").forEach(el => {
+     //     el.addEventListener("mouseover", () =>{ 
+     //                                             setCursorVariant('hoverProyect')});
+     //     el.addEventListener("mouseout", () => {
+     //                                             setCursorVariant('initial') });
+     //     });
+        elements.projectCards.forEach(el => {
+            const mouseOver = () => setCursorVariant('hoverProyect');
+            const mouseOut = () => setCursorVariant('initial');
+            el.addEventListener("mouseover", mouseOver);
+            el.addEventListener("mouseout", mouseOut);
+            cleanup.add(() => {
+                el.removeEventListener("mouseover", mouseOver);
+                el.removeEventListener("mouseout", mouseOut);
+            });
+        });
+        // document.querySelectorAll(".proyect-card--wrapper").forEach(el => {
+        //     el.addEventListener("mouseover", () =>{ 
+        //                                             setCursorVariant('hoverProyect')
+        //                                             // setviewProjectVariant('show')
+        //                                         });
+        //     el.addEventListener("mouseout", () => {
+        //                                             setCursorVariant('initial')
+        //                                             // setviewProjectVariant('hidde')
+        //                                          });
+        //     });
+        return () => cleanup.forEach(cleanup => cleanup());
     };
 
-    const variants = {
+
+    useEffect(() => {
+        window.addEventListener("mousemove", handleMouseMove);
+        const cleanupHoverEvents = handleHoverEvents();
+        
+        // Cleanup function
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            cleanupHoverEvents();
+        };
+    }, []);
+
+    
+     const variants = {
         initial: {
             // x:mousePosition.x - 21,
             // y:mousePosition.y - 21,
@@ -361,7 +448,8 @@ const Cursor = ({revealProjectThumb}) => {
             // ease: "linear"
          }}
         >
-             {revealProjectThumb?
+            { revealProjectThumb?
+            
             <motion.div 
             className="bg-black-bg h-full w-full rounded-full"
             initial={{ opacity: 0, scale: 0.5 }}

@@ -73,7 +73,7 @@ function WorkProcess() {
                         //         </div>
                         //     </div> 
                         // </motion.li>  
-                        <li>
+                        <li  >
                             <WorkProcessCard data={process} />
                         </li>  
                        

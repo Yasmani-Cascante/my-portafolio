@@ -24,7 +24,7 @@ function Masthead() {
             >
 
                 <div className="ml-5 sm:ml-20 lg:ml-28 pt-28 md:pt-36 max-w-[69rem]">
-                    <span className="text-5xl block dark:text-white-dark">Hi!, I'm a freelance</span>
+                    <span className="text-5xl block dark:text-white-dark">Hi!, I&apos;m a freelance</span>
                 {/* <h1 className=' text-[4rem] md:text-8xl lg:text-9xl font-bold inline md:whitespace-nowrap'>Creative <br />  Web Designer <br /> & Developer</h1> */}
                 <div className="mt-6">
                     <h1 className='masthead-title inline'>Web Designer <br/> & Developer</h1>

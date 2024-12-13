@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 import LoadingBtn from '../ui/loadingBtn';
 import { useRef, useState } from 'react';
 
-const contactForm = () => {
+const ContactForm = () => {
     const [loading, setLoading] = useState(0)
     const form = useRef();
 
@@ -79,4 +79,4 @@ const contactForm = () => {
         </form>
     )
 }
-export default contactForm;
+export default ContactForm;

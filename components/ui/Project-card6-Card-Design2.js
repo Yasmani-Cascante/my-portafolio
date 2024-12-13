@@ -157,7 +157,7 @@ const getCity = (tag , index) => {
                 :null} */}
                 <div className="project-card__tags mt-1 z-10">
                     { project_tags.map((tag, index) => (
-                    <span className="bg-black-dark text-white-dark uppercase text-xs mr-2  px-2">{tag.name}</span>
+                    <span  key={index} className="bg-black-dark text-white-dark uppercase text-xs mr-2  px-2">{tag.name}</span>
 
                     ))}
                 </div>

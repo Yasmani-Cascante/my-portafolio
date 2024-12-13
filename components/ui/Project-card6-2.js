@@ -151,7 +151,7 @@ const getCity = (tag , index) => {
                     <div className="line bg-black-dark text-white-dark uppercase text-xs w-full"></div>    
                     <div className="mt-0 z-10 flex mb-1">
                         { project_tags.map((tag, index) => (
-                        <span className="border border-black-light bg-black-bg text-white text-sm px-3 mr-2">{tag.name} </span>
+                        <span  key={index} className="border border-black-light bg-black-bg text-white text-sm px-3 mr-2">{tag.name} </span>
 
                         ))}
                     </div>

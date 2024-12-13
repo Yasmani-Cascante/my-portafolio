@@ -155,7 +155,7 @@ const getCity = (tag , index) => {
                     <div className="tags-wrapper mt-6">
                     { project_tags.map((tag, index) => (
                 //   <span className="border rounded-full border-black-light uppercase text-xs px-4 py-1 mr-3 ">{tag.name} </span>
-                  <span className="border-1 border-b uppercase text-xs px-4 py-1 mr-3 ">{tag.name} </span>
+                  <span  key={index} className="border-1 border-b uppercase text-xs px-4 py-1 mr-3 ">{tag.name} </span>
 
                   ))} 
                     
