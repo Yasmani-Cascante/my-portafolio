@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 // Components 
+import Cursor from '../components/ui/Cursor';
 import Navigation from '../components/layout/Navigation';
 import Masthead from '../components/layout/Masthead';
 import Footer from '../components/layout/Footer';
@@ -20,19 +21,26 @@ import { motion } from "framer-motion";
 export default function Home({projects}) {
 
   const [cursorHide, setCursorHide] = useState(false);
+  const [projectThumbnail, setprojectThumbnail] = useState(null);
+    
+  const hoverDispatch = (name) => {
+    // console.log("projexct name," name);
+      setprojectThumbnail(name)
+        // console.log('hoverProjectImage', projectImage);
 
-  const hoverDispatch = (e) => {
-    const mouseEvent = e.type;
-    // mouseenter
-    // mouseleave
-    // console.log('Aqui!', mouseEvent);
-    if(mouseEvent == 'mouseenter') {
-      setCursorHide(true)
-    // console.log('Aqui!', cursorHide);
-    } else {
-      setCursorHide(false)
     }
-  }
+  // const hoverDispatch = (e) => {
+  //   const mouseEvent = e.type;
+  //   // mouseenter
+  //   // mouseleave
+  //   // console.log('Aqui!', mouseEvent);
+  //   if(mouseEvent == 'mouseenter') {
+  //     setCursorHide(true)
+  //   // console.log('Aqui!', cursorHide);
+  //   } else {
+  //     setCursorHide(false)
+  //   }
+  // }
 
   
 // const variants = {
@@ -65,20 +73,25 @@ export default function Home({projects}) {
 
       <main>
       {/* <About /> */}
-      <About hoverDispatch={hoverDispatch}/> 
-      <ProjectsList projects={projects} />
+      <About /> 
+      <ProjectsList 
+      projects={projects} 
+      hoverDispatch={hoverDispatch}
+      />
       <WorkProcess />
       <Contact />
       </main>
 
-      <div className='layer'></div>
+      <div className='bg_noise'></div>
       <Footer />
       {/* <motion.div
        variants={variants}
        animate={cursorVariant}
        transition={{ delay: .3, duration: 1 }}
       > */}
-        {/* <Cursor /> */}
+        <Cursor 
+          revealProjectThumb={projectThumbnail}
+        />
       {/* </motion.div> */}
     </div>
   )
@@ -87,7 +100,8 @@ export default function Home({projects}) {
 export async function getStaticProps() {
   const notion = new Client({ auth: process.env.NOTION_API_KEY });
   const databaseId = process.env.NOTION_DATABASE_ID;
-
+  console.log('databaseId', databaseId);
+  
   const response = await notion.databases.query({
     database_id: databaseId
   });

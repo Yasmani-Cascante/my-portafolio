@@ -108,9 +108,10 @@ function Navigation() {
             animate={isOpen ? "show" : "hidden"}
          >
              {[
-                    ['Home', '/dashboard'],
-                    ['Projects', '/projects'],
-                    ['About me', '/about-me'],
+                    // ['Home', '/dashboard'],
+                    ['Work', '/projects'],
+                    ['About', '/about'],
+                    ['Contact', '/contact'],
                 ].map(([title, url]) => (
                   <motion.li 
                   key={title}
@@ -127,11 +128,11 @@ function Navigation() {
                 ))}
 
             <motion.li className="lg:ml-5 pt-10 lg:pt-0 text-center">
-              <div className="flex gap-x-8 lg:ml-8 xl:ml-12 gap-y-6 flex-wrap justify-center">
+              <div className="flex items-center gap-x-8 lg:ml-8 xl:ml-12 gap-y-6 flex-wrap justify-center">
               {/* <button className="text-sm font-bold shadow-custom hover:shadow-none hover:translate-x-1 transition mr-16 lg:mx-16"> */}
-              <button className="btn-primary text-sm font-bold shadow-custom hover:shadow-none hover:translate-x-1 transition ">
+              {/* <button className="btn-primary text-sm">
                Contact me 
-            </button>
+            </button> */}
             <LangDropdown />
             <ThemeSwitch />
               </div>

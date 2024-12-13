@@ -12,7 +12,7 @@ module.exports = {
         bg: '#efefef', 
       },
       gray: '#e5e7eb',
-      yellow: '#f99a45 ',
+      yellow: '#f99a45',
       'black': {
         lighten: 'rgba(0,0,0, 0.075)',
         light: 'rgba(0,0,0, 0.5)',
@@ -21,11 +21,13 @@ module.exports = {
         bg: '#222222'
       },
       red: '#ef4444',
+      red2: '#ff5555',
       blue: {
         light: '#317BCD',
         DEFAULT: '#004DBA'
       },
       code: 'green',
+      green: '#66fb66',
       secondary: 'cornflowerblue',
     },
 
@@ -49,6 +51,9 @@ module.exports = {
     extend: {
       boxShadow: {
         'custom': '4px 4px 0px rgba(0, 0, 0, 1)',
+        'normal': '2px 8px 16px rgba(0, 0, 0, 0.20)',
+        // 'big': '4px 16px 32px rgba(0, 0, 0, 0.25)',
+        'big': '4px 16px 24px rgba(0, 0, 0, 0.25)',
       }
     },
   },

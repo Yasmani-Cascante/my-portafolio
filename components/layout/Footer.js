@@ -5,7 +5,7 @@ import ArrowUpSvg from "../../public/assets/img/arrow-up.svg";
 function Footer() {
     return (
       <footer className="w-full bg-black pt-28 pb-6 relative">
-        <div className="layer mix-darken"></div>
+        {/* <div className="bg_noise mix-darken"></div> */}
         <ul className="container flex text-white justify-between items-center md:items-end gap-8 pb-4 flex-col md:flex-row">
           <li>y_cascante-martinez</li>
           <li>2022 Copyright</li>

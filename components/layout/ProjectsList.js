@@ -1,9 +1,11 @@
 import Image from "next/image";
 import CirlcesSvg from "../../public/assets/img/Circles.svg";
-// import Project_card from "../ui/Project-card4"
-import Project_card from "../ui/Project-card2"
+// import Project_card from "../ui/Project-card6"
+import Project_card from "../ui/Project-card6-2"
+// import Project_card from "../ui/Project-card5"
 // import Line from "../../public/assets/img/line-blur.png";
 import Line from "../../public/assets/img/line-blur.svg";
+import Ellipse from "../../public/assets/img/Ellipse.svg";
 
 import { AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -26,7 +28,7 @@ function Store({ match }) {
   }
 
   
-function ProjectsList({ projects }) {
+function ProjectsList({ projects, hoverDispatch }) {
 
     const [selectedId, setSelectedId] = useState(null)
     // let { id } = match.params;
@@ -38,8 +40,8 @@ function ProjectsList({ projects }) {
     //     console.log(".... ", selectedId);
         
     //    }, 1000);
-
       }
+
       const CloseModalWindow = () => {
         console.log("beforeModalWindow", selectedId);
 
@@ -76,10 +78,11 @@ function ProjectsList({ projects }) {
                             project={project}
                             // layoutId={selectedProyect}
                             selectedProyect={selectedProyect}
+                            hoverDispatch={hoverDispatch}
                             />
                         ))}
                        <AnimatePresence>
-                       {selectedId && 
+                       {selectedId &&
                        (
                          <ProyectOpen 
                          id={selectedId} 
@@ -98,7 +101,10 @@ function ProjectsList({ projects }) {
 
                 </div>  
             </div>
-            <Line className="absolute top-0 right-0 2xl:left-[5vw] z-[-1] h-full opacity-70" />  
+            {/* <Line className="absolute top-0 right-0 2xl:left-[5vw] z-[-1] h-full opacity-70" />   */}
+            {/* <Ellipse 
+                     className="absolute top-0 z-[-1] opacity-40"
+                    /> */}
         </section>
     )
 }

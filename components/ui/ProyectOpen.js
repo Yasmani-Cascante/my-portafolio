@@ -3,10 +3,13 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Ellipse from "../../public/assets/img/Ellipse-blue.svg";
 import Line from "../../public/assets/img/line-blur.svg";
+import ArrowDownSvg from "../../public/assets/img/icons/arrow-down.svg";
+import VerticalLinesSvg from "../../public/assets/img/vertical-lines.svg";
+
 // import { ArrowDownIcon } from '@heroicons/react/24/solid';
 import { ArrowUpLeftIcon } from '@heroicons/react/24/solid';
 
-// import Layer_noise from "../../public/assets/img/Noise.png";
+// import bg_noise from "../../public/assets/img/Noise.png";
 
 
 
@@ -28,13 +31,14 @@ export default function ProyectOpen ({id, projects, CloseModal, layoutId}) {
     const project_tags = project.properties.Tags.multi_select;
     
     const project_files = project.properties.Files.files;
-    let project_files_url = null;                                                                              
+    let project_files_url = [];                                                                              
         if (project_files.length > 0) {
-         project_files_url = project_files[0].file.url;
+        //  project_files_url = project_files[0].file.url;
+         project_files.forEach(i => project_files_url.push(i.file.url))
         }
-    
+        
     // const { category, title } = items.find(project => project.id === id);
-    // console.log('projects', project_files_url);
+    console.log('projects', project_files_url);
 
     return (
         <>
@@ -55,60 +59,176 @@ export default function ProyectOpen ({id, projects, CloseModal, layoutId}) {
             //  /> */}
 
          </motion.div>
-        <motion.div className="card-content-container open layer-blue z-10"
+        <motion.div className="proyect-card--wrapper open layer-blue z-10"
         layoutId={id}
+        whileHover={() => {console.log('asasdas');}}
         >
         <motion.div 
-        className="project-card open container relative border bg-white"       
+        className="project-card open container relative border"       
        >
-        <div className="layer"></div>
-
+        <div className="bg_noise"></div>
+{/* 
+        <div className="card-open__footer flex w-full mb-24">
             <button 
-            id="test"
-            className="project-card-btn mb-10 border-none flex items-end uppercase text-4xl transition font-bold"
-            onClick={() => CloseModal()}
-            > 
-                <ArrowUpLeftIcon
-                className="h-8 w-8 mr-2"
-            onClick={() => CloseModal()}
+            className="uppercase flex justify-between w-1/3 items-center px-10 ml-auto border-none"
+            onClick={() => CloseModal()} 
+            >
+                <ArrowDownSvg 
+                    className="rotate-90 svg--white"
+                    onClick={() => CloseModal()}
+                    
                 />
-                <span className="">
-                    Back
-                </span>
+                <span className="beta">back</span>
+                
             </button>
-
-            <div className="project-card__header flex lg:items-end flex-col lg:flex-row">
+            <VerticalLinesSvg className="" />
+            <VerticalLinesSvg className="" />
+        </div> */}
+        
+        <div className="card-open__header md:px-16 mt-10">
+            <div className=" flex lg:items-center flex-col lg:flex-row">
                 <h2 className="font-normal"> { project_title } </h2>
-                <span className="lg:ml-auto font-bold mt-4 text-black-light dark:text-white-dark">{ project_date }</span>
+                <button 
+                className="lg:ml-auto py-5 px-9 border-2 border-black-bg rounded-full bg-white"
+                onClick={() => CloseModal()} 
+                >
+                <ArrowDownSvg 
+                    className="rotate-90"  
+                    onClick={() => CloseModal()}    
+                />
+                {/* <span className="theta">back</span> */}
+                
+            </button>
             </div>
 
-            <p className="my-10 w-[70%] mb-24"> { project_description } </p>
+        </div>
+           
                 
+        <div className="relative card-open-gallery">
+        {/* <div className="bg_noise"></div> */}
+
+            <div className="card-open__banner relative w-[100%] h-[900px]">
+                <Image 
+                     alt={`An image of the ${project_title} proyect`}
+                     className="block h-auto"
+                     src={project_files_url[0]}
+                     priority
+                    //  width={500}
+                    // height={500}
+                     fill
+                     style={
+                     {
+                     objectFit:"contain",
+                    //  minHeight: "100vh",
+                     }
+                     }
+                 />
+            </div>
+             <div className="tablet-section relative h-[600px] my-36">
+             <Image 
+                     alt={`An image of the ${project_title} proyect`}
+                     className=""
+                     src={project_files_url[1]}
+                     priority
+                     fill
+                     style={
+                     {
+                     objectFit:"contain",
+                    //  minHeight: "100vh",
+                     }
+                     }
+                 />
+             </div>
+             <div className="movile-section my-36">
+             <div className="relative h-96">
+                <Image 
+                        alt={`An image of the ${project_title} proyect`}
+                        className="block h-auto"
+                        src={project_files_url[2]}
+                        priority
+                        fill
+                        style={
+                        {
+                        objectFit:"contain",
+                        //  minHeight: "100vh",
+                        }
+                        }
+                    />                
+             </div>
+             <div className="relative h-96">
+                <Image 
+                        alt={`An image of the ${project_title} proyect`}
+                        className="block h-auto"
+                        src={project_files_url[2]}
+                        priority
+                        fill
+                        style={
+                        {
+                        objectFit:"contain",
+                        //  minHeight: "100vh",
+                        }
+                        }
+                    />                
+                </div>
+                <div className="relative h-96">
+                <Image 
+                        alt={`An image of the ${project_title} proyect`}
+                        className="block h-auto"
+                        src={project_files_url[2]}
+                        priority
+                        fill
+                        style={
+                        {
+                        objectFit:"contain",
+                        //  minHeight: "100vh",
+                        }
+                        }
+                    />                
+                </div>
+             </div>
+            
+{/* 
+         {project_files_url.length > 0?
+             
+          project_files_url.map( url => 
         
-        <div className="relative w-full project-image-open">
-         {project_files_url?
-                 <Image 
-                 alt={`An image of the ${project_title} proyect`}
-                 className="block h-auto"
-                 src={project_files_url}
-                 priority
-                 fill
-                 style={
-                    {
-                   objectFit:"cover",
-                   minHeight: "100vh",
-                    }
-                }
-                 />  
-                 : null}
+        <div className="h-96 relative my-36">
+        <Image 
+        alt={`An image of the ${project_title} proyect`}
+        className="block h-auto"
+        src={url}
+        priority
+        fill
+        style={
+           {
+          objectFit:"contain",
+        //   minHeight: "100vh",
+           }
+       }
+        />
+        </div>
+       
+          )
+  
+                 : null} */}
           
         </div>
+        <div className="card-open__footer flex w-full">
         <button 
-        className="text-sm font-bold shadow-custom hover:shadow-none hover:translate-x-1 transition"
+        className="uppercase flex justify-between w-1/3 items-center px-10 ml-auto"
         onClick={() => CloseModal()} 
         >
-               back 
+                <ArrowDownSvg 
+                    className="rotate-90 svg--white"
+                    onClick={() => CloseModal()}
+                    
+                />
+            <span className="beta">back</span>
+                
             </button>
+            <VerticalLinesSvg className="" />
+        </div>
+        
         </motion.div>
         </motion.div>
         </>

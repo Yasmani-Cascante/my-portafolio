@@ -23,7 +23,7 @@ export default function MyListbox() {
         <Listbox.Button
 
         className={({ selected }) =>
-                    `font-bold border-0 transition-all inline-flex w-full items-center
+                    `btn-secondary border-0 transition-all inline-flex w-full items-center
                      ${selected ? 'bg-blue shadow-none' : 'text-gray-900'
                     }`
                   }
@@ -54,7 +54,7 @@ export default function MyListbox() {
         >
       <Listbox.Options
       className="list-box-lang absolute z-10 right-0 mt-2 origin-top-right divide-y divide-gray-100
-       bg-white hover:cursor-pointer border"
+       hover:cursor-pointer border-2"
        
       >
         {Langs.map((person) => (
@@ -64,7 +64,7 @@ export default function MyListbox() {
           >
             {({selected}) => (
                <li
-               className={`
+               className={` dark:bg-black-bg
                ${selected ? 'bg-white-bg font-bold' : 'bg-white'}
             `}
                >

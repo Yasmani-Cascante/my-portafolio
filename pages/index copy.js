@@ -71,7 +71,7 @@ export default function Home({projects}) {
       <Contact />
       </main>
 
-      <div className='layer'></div>
+      <div className='bg_noise'></div>
       <Footer />
       {/* <motion.div
        variants={variants}

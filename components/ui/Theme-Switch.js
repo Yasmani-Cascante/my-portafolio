@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 
-import DarkSwitcher from "../../public/assets/img/switcher-moon.svg";
+// import DarkSwitcher from "../../public/assets/img/switcher-moon.svg";
+import DarkSwitcher from "../../public/assets/img/night-switch.svg";
 // import DarkSwitcher from "../../public/assets/img/switcher-light.svg";
-import LightSwitcher from "../../public/assets/img/switcher-sun.svg";
+// import LightSwitcher from "../../public/assets/img/switcher-sun.svg";
+import LightSwitcher from "../../public/assets/img/day-switch.svg";
+// import LightSwitcher from "../../public/assets/img/day-switch2.svg";
 // import LightSwitcher from "../../public/assets/img/switcher-night.svg";
 
 // import {Icon} from '@iconify/react'
@@ -37,7 +40,7 @@ const ThemeSwitch = () => {
       //           // onClick={() => setTheme('light')}
       //           // />
             //       // </button>
-              <div className='h-[40px] w-[h-[40px]]'>
+              <div className=''>
                 {/* <span>Light side?</span> */}
                 <DarkSwitcher
                 className='hover:cursor-pointer'
@@ -57,7 +60,7 @@ const ThemeSwitch = () => {
       //           // onClick={() => setTheme('dark')}
       //           // />
       //       // </button>
-            <div className='h-[40px] w-[h-[40px]]'>
+            <div className='svg-wrapper'>
                 {/* <span>Dark side?</span> */}
                 <LightSwitcher
                 className='hover:cursor-pointer'

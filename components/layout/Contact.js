@@ -94,7 +94,7 @@ function Contact() {
                   <DiagonalLinesSvg 
                     className="h-[60px] "
                     />
-                                <DiagonalLinesSvg 
+                    <DiagonalLinesSvg 
                     className="h-[60px] "
                     />
                   </div>

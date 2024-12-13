@@ -4,6 +4,13 @@ import { EyeIcon } from '@heroicons/react/24/solid';
 import { ArrowUpRightIcon } from '@heroicons/react/24/solid';
 import ArrowSvg from "../../public/assets/img/icons/ph_arrow-arc-right.svg";
 // import { EyeIcon } from '@heroicons/react/24/solid';
+// import LoadingBtn from '../ui/loadingBtn';
+import Image from "next/image";
+
+import Project  from "../../public/assets/img/Thumbnails/Project.png";
+import Foxym  from "../../public/assets/img/Thumbnails/Foxym.png";
+import Test  from "../../public/assets/img/Thumbnails/Test.png";
+import ProjectTitle  from "../../public/assets/img/Thumbnails/ProjectTitle.png";
 
 
 // we will not render <Cursor/> on mobile/touch devices.
@@ -12,7 +19,8 @@ const isMobile = () => {
     return /Android|Mobi/i.test(ua);
 };
 
-const Cursor = ({}) => {
+
+const Cursor = ({revealProjectThumb}) => {
 
     // Abort if we are in responsive mode 
     if (typeof navigator !== "undefined" && isMobile()) return null;
@@ -25,7 +33,9 @@ const Cursor = ({}) => {
 
     // const [linkHovered, setLinkHovered] = useState(false);
     const [cursorVariant, setCursorVariant] = useState('initial');
+    // const [viewProjectVariant, setviewProjectVariant] = useState('hidde');
     const [cursorHoverProject, setCursorHoverProject] = useState('hidde');
+    const [projectThumb, setProjectThumb] = useState(null);
 
     const handleMouseMove = (e) => {
         setMousePosition({
@@ -34,6 +44,7 @@ const Cursor = ({}) => {
         });
     };
 
+    
     useEffect(() => {
         window.addEventListener("mousemove", handleMouseMove);
         handleHoverEvents();
@@ -47,11 +58,18 @@ const Cursor = ({}) => {
     const handleHoverEvents = () => {
 
         // Links & buttons hover Handle
-        document.querySelectorAll("a, button").forEach(el => {
+        document.querySelectorAll("a").forEach(el => {
             el.addEventListener("mouseover", () => setCursorVariant('hoverLink'));
             el.addEventListener("mouseout", () => setCursorVariant('initial'));
         });
-
+        document.querySelectorAll("button").forEach(el => {
+            el.addEventListener("mouseover", () => setCursorVariant('hide'));
+            el.addEventListener("mouseout", () => setCursorVariant('initial'));
+        });
+        const projectLink = document.querySelector("#projectLink");
+        projectLink.addEventListener("mouseover", () => setCursorVariant('hide'));
+        projectLink.addEventListener("mouseout", () => setCursorVariant('initial'));
+       
         // About Photo Cursor hidden
        const aboutImg = document.querySelector('#AboutImg');
        aboutImg.addEventListener("mouseover", () => setCursorVariant('hide'))
@@ -63,7 +81,7 @@ const Cursor = ({}) => {
        hamburgerMenu.addEventListener("mouseout", () => setCursorVariant('initial'))
        
         // Click Event Listeners
-        document.addEventListener("mousedown", () => setCursorVariant('hoverLink') );
+        document.addEventListener("mousedown", () => setCursorVariant('click') );
         document.addEventListener("mouseup", () => setCursorVariant('initial'));
         
         // Headers hover Handle
@@ -75,18 +93,31 @@ const Cursor = ({}) => {
             el.addEventListener("mouseover", () => setCursorVariant('big'));
             el.addEventListener("mouseout", () => setCursorVariant('initial'));
         });
+        const smile = document.querySelector('.smile');
+            smile.addEventListener("mouseover", () => setCursorVariant('big'));
+            smile.addEventListener("mouseout", () => setCursorVariant('initial'));
     //     document.querySelectorAll("div.project-card__header > h3, .poject-card__footer-link").forEach(el => {
     //         el.addEventListener("mouseover", () => setCursorVariant('hoverLink2'))
     //         el.addEventListener("mouseout", () => setCursorVariant('initial'))
     //         el.addEventListener("mouseover", () => setCursorHoverProject('show'));
     //         el.addEventListener("mouseout", () => setCursorHoverProject('hidde'));
     //    });
-       document.querySelectorAll(".project-card").forEach(el => {
-        el.addEventListener("mouseover", () => setCursorVariant('hoverProyect'))
-        el.addEventListener("mouseout", () => setCursorVariant('initial'))
-        el.addEventListener("mouseover", () => setCursorHoverProject('show'));
-        el.addEventListener("mouseout", () => setCursorHoverProject('hidde'));
-   });
+    //    document.querySelectorAll(".project-card").forEach(el => {
+    //     el.addEventListener("mouseover", () =>{ 
+    //                                             setCursorVariant('hoverProyect')});
+    //     el.addEventListener("mouseout", () => {
+    //                                             setCursorVariant('initial') });
+    //     });
+        document.querySelectorAll(".proyect-card--wrapper").forEach(el => {
+            el.addEventListener("mouseover", () =>{ 
+                                                    setCursorVariant('hoverProyect')
+                                                    // setviewProjectVariant('show')
+                                                });
+            el.addEventListener("mouseout", () => {
+                                                    setCursorVariant('initial')
+                                                    // setviewProjectVariant('hidde')
+                                                 });
+            });
 
     };
 
@@ -94,155 +125,213 @@ const Cursor = ({}) => {
         initial: {
             // x:mousePosition.x - 21,
             // y:mousePosition.y - 21,
-            x:mousePosition.x - 21,
-            y:mousePosition.y - 21,
+            borderRadius: 300,
+            width: 30,
+            height: 30,
+            x:mousePosition.x - 15,
+            y:mousePosition.y - 15,
+            // scale:1,
+
             // backgroundColor: "transparent",
-            
+            // backgroundColor: "#fefefe",
             // mixBlendMode: "difference",
-            border: `3px solid`,
+            // boxShadow: `4px 16px 24px grey`,
+
+            // border: `3px solid`,
             // borderColor: `#222222`,
             // height: 30,
             // width: 30,
-            // transition: {
-            //     // duration: 0,
+            transition: {
+                // duration: 0.07,
             //     // scale: {
             //     //     duration: 0.15
             //     // },
             //     // backgroundColor: {duration: 0.15}
-            // }
+            }
         },
         hide: {
-            x:mousePosition.x - 150,
-            y:mousePosition.y - 150,
-            width: 300,
-            height: 300,
+            // x:mousePosition.x - 30,
+            // y:mousePosition.y - 30,
+            // width: 60,
+            // height: 60,
+            x:mousePosition.x - 5,
+            y:mousePosition.y - 5,
+            width: 15,
+            height: 15,
+            mixBlendMode: "difference",
+
+            // border: `1px solid`,
+            // backgroundColor: '#000',
+            scale: 0,
             opacity: 0,
+              transition: {
+                // width: {duration: 0.15},
+                // height: {duration: 0.15},
+                // opacity: {duration: 0.3}
+
+                duration: 0.15,
+            // //     // scale: {
+            // //     //     duration: 0.15
+            // //     // },
+            // //     // backgroundColor: {duration: 0.15}
+            }
 
           },
-        
+       
         hoverProyect: {
-            // height: 72,
-            // width: 72,
+            height: 200,
+            width: 200,
+            // border: `2px solid`,
+            // backgroundColor:'transparent',
+            // borderRadius: 0,
+            // rotate: -15,
+            // boxShadow: 'none',
             // scale: .2,
-            scale: 0.5,
-            x:mousePosition.x - 15,
-            y:mousePosition.y - 15,
-            backgroundColor: '#000',
-            // mixBlendMode: "unset",
+            // scale: 0.5,
+            x:mousePosition.x - 50,
+            y:mousePosition.y - 50,
+            // backgroundColor: 'rgba(0,0,0, 0.75)',
+            // mixBlendMode: "difference",
             // backgroundColor: "#f99a45",
+            // backgroundColor: "#fefefe",
+
+            // borderRadius: 3,
             // border: "4px solid",
             // borderColor: "#fff",
             // padding: 4,
             transition: {
-                duration: 0.5,
-                x: {
-                    duration: 0
-                },
-                y: {
-                    duration: 0
-                },
-                // backgroundColor: {duration: 1}
-                // ease: "ease" 
-                // ease: "anticipate"
-                // type: "inertia",
-                // velocity: 50
+            //     duration: 0.5,
+            //     x: {
+            //         duration: 0
+            //     },
+            //     y: {
+            //         duration: 0
+            //     },
+            //     // backgroundColor: {duration: 1}
+            //     // ease: "ease" 
+            //     // ease: "anticipate"
+            //     // type: "inertia",
+            //     // velocity: 50
             }
         },
         hoverLink: {
-            // height: 72,
-            // width: 72,
-            scale: 2.2,
-            x:mousePosition.x - 15,
-            y:mousePosition.y - 15,
+            height: 72,
+            width: 72,
+            // scale: 2.2,
+            // scale: 0.5,
+            x:mousePosition.x - 35,
+            y:mousePosition.y - 35,
+ 
             backgroundColor: '#fefefe',
+            // border: `3px solid #000`,
+            boxShadow: `4px 16px 24px grey`,
             mixBlendMode: "difference",
+            
             transition: {
-                duration: 0,
-                scale: {
-                    duration: 0.15
-                },
+                // duration: 0,
+                // scale: {
+                //     duration: 0.15
+                // },
+
                 // height: {duration: 0.5},
                 // width: {duration: 0.15},
                 // ease: "ease" 
             }
         },
-        hoverLink2: {
-            // height: 72,
-            // width: 72,
-            scale: 4,
-            x:mousePosition.x - 15,
-            y:mousePosition.y - 15,
-            backgroundColor: '#fefefe',
-            // border: '0.1rem solid #fefefe',
-            mixBlendMode: "difference",
+        click: {
+            height: 20,
+            width: 20,
+            // scale: 2.2,
+            // scale: 0.5,
+            x:mousePosition.x - 10,
+            y:mousePosition.y - 10,
+ 
+            // backgroundColor: '#fefefe',
+            // border: `3px solid #000`,
+            // boxShadow: `4px 16px 24px grey`,            
             transition: {
-                duration: 0,
-                scale: {
-                    duration: 0.15
-                },
+                duration: 0.15
+                // scale: {
+                //     duration: 0.15
+                // },
+
+                // height: {duration: 0.5},
+                // width: {duration: 0.15},
+                // ease: "ease" 
             }
         },
         big: {
-            // scale:5,
-            // x:mousePosition.x - 15,
-            // y:mousePosition.y - 15,
-            scale: 5,
-            x:mousePosition.x - 15,
-            y:mousePosition.y - 15,
+            height: 150,
+            width: 150,
+            // scale: 1.1,
+            x:mousePosition.x - 75,
+            y:mousePosition.y - 60,
             backgroundColor: "#fefefe",
             mixBlendMode: "difference",
-            // transition: {
-            //     duration: 0,
-            //     scale: {
-            //         duration: 0.15
-            //     }
-            // }
+            // boxShadow: `4px 16px 24px grey`,
+            transition: {
+                // duration: 0.15,
+                // scale: {
+                //     duration: 0.15
+                // }
+                //     height: {duration: 0.5},
+                // width: {duration: 0.15},
+                // mixBlendMode: {duration: 0.15},
+            }
 
         },
         biggest: {
-            // scale:5,
+            height: 250,
+            width: 250,
+            // scale:2,
             // x:mousePosition.x - 15,
             // y:mousePosition.y - 15,
-            scale:9,
-            x:mousePosition.x - 15,
-            y:mousePosition.y - 15,
+            // scale:2,
+            x:mousePosition.x - 125,
+            y:mousePosition.y - 125,
             backgroundColor: "#fefefe",
             mixBlendMode: "difference",
-            // transition: {
+            // zoom: .3,
+            transition: {
             //     duration: 0,
             //     scale: {
             //         duration: 0.15
             //     }
-            // }
+            }
 
         },
 
     }
 
-    const variantsEyes = {
+    const viewCircle = {
         hidde: {
             opacity: 0,
+            
             // rotate: 0
             // padding: `0px`,
             // scale: 0,
             // height: 0,
-            transition: {
-                delay: 0
-            }
+            // height: 30,
+            // width: 0,
+            // transition: {
+            //     delay: 0
+            // }
         },
         show: {
             opacity: 1,
-            // height: `100%`,
+            // height: `200px`,
+            // width: `200px`,
                 // scale: 1,
-                // mixBlendMode: "difference",
+                // mixBlendMode: "normal",
+                
 
                 // padding: `12px`,
                 // width: 60,
                 // height: 60,
-                // x:mousePosition.x - 30,
-                // y:mousePosition.y - 30,
+                // x:mousePosition.x - 850,
+                // y:mousePosition.y - 850,
                 // backgroundColor: "#fff",
-                // backgroundColor: "#ffff",
+                // backgroundColor: "#000",
                 
                 // mixBlendMode: "difference", 
             // x:mousePosition.x - 21,
@@ -254,8 +343,10 @@ const Cursor = ({}) => {
 
     }
 
+    const newLocal = null;
     return (
         <motion.div
+        className="my-cursor rounded-full overflow-visible"
          variants={variants}
          animate={cursorVariant}
         //  transition={{ ease: "linear", duration: 0 }}
@@ -269,38 +360,55 @@ const Cursor = ({}) => {
             },
             // ease: "linear"
          }}
-         className="my-cursor"
         >
-            
+             {revealProjectThumb?
             <motion.div 
-            className="hover-project-cursor relative "
-            variants={variantsEyes}
-            animate={cursorHoverProject}
+            className="bg-black-bg h-full w-full rounded-full"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            // variants={viewCircle}
+            // animate={viewProjectVariant}
             transition={{
-                // duration: 0.3,
-                 ease: "easeInOut",
-                //  type: "inertia",
-                //  damping: 5,
-                //  stiffness: 50,
-                //  restDelta: 0.001
-                 delay: 0.8
-                // scale: {duration:0}
+             duration: 0.25
              }}
-            //  animate={{ rotate: 180 }}
-                // transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
             >
                 <motion.div 
-                // className="absolute flex justify-center w-full items-start translate-y-[-0.50rem] text-black"
-                className="flex-col justify-around items-center w-fit -translate-y-32 translate-x-8 "
-                
+                className="shadow-big bg-blue-light rounded-full h-24 w-24 relative -left-4 top-0 z-10 flex items-center align-middle "
+                style={{left:mousePosition.x / 10, top:mousePosition.y / 10}}
+                transition={{
+                    duration: 0.25
+                    }}
                 >
-                {/* <ArrowUpRightIcon className="arrow-svg w-[50px] h-[50px]"/> */}
                 
-                <span className="text-[4rem] font-bold rotate-12">click!</span>
-                <ArrowSvg className="arrow-svg w-[64px] h-[64px]"/>
-                {/* <EyeIcon className="arrow-svg w-[64px] h-[64px]"/> */}
+                <span className="text-white text-center w-full"
+                >
+                    view
+                </span>
                 </motion.div>
+           
+                <Image 
+                alt={`An image of the proyect`}
+                fill
+                className="rounded-full"
+            //  priority
+            //  src={revealProjectThumb}
+            //  src={projectThumb}
+                src={`/assets/img/Thumbnails/${revealProjectThumb}.png`}
+                // src={`/../public/assets/img/Thumbnails/${revealProjectThumb}.png`}
+                style={
+                    {
+                    objectFit:"cover",
+                    // objectFit:"contain",
+
+                    // minHeight: "100%",
+                //    filter: "grayscale(100%)"
+                    }
+                }
+                />  
             </motion.div>
+            : newLocal }
+           
+
         </motion.div>
     )
  

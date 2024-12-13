@@ -34,41 +34,48 @@ function Project_card({project, selectedProyect}) {
         const [cursorVariant, setCursorVariant] = useState('showImage');
     
         const handleMouseMove = (e) => {
-
             // const imagePosition = {
-            //     posX: ref.current.offsetLeft,
-            //     posY: ref.current.offsetTop,
-            //   };
-            //   const posX = e.pageX - imagePosition.posX;
-            //   const posY = e.pageY - imagePosition.posY;
+                const cardContainerPosition = {
+                    posX: ref.current.offsetLeft,
+                    posY: ref.current.offsetTop,
+                  };
+            console.log("cardContainerPosition", cardContainerPosition);
+
+            //  const posX = e.pageX - cardContainerPosition.posX;
+            // const posY = e.pageY - cardContainerPosition.posY;
+            // console.log("cardContainerPosition", posX, posY);
         
             //   const posX = e.clientX / 2;
             //   const posY = e.clientY / 2;
-            //   const posX = e.clientX - imagePosition.posX + ref.current.offsetWidth;
-            //   const posY = e.clientY - imagePosition.posY - ref.current.offsetHeight;
+              const posX = e.clientX - cardContainerPosition.posX - ref.current.offsetWidth;
+              const posY = e.clientY - cardContainerPosition.posY - ref.current.offsetHeight;
   
         setPosition({
-            // x: e.clientX - ref.current.clientWidth,
-            // y: e.clientY - ref.current.clientHeight,
-            // x: (e.clientX  / ref.current.clientWidth) * 100,
-            // y: (e.clienty  / ref.current.clientHeight) * 100,
+            x: posX + 500,
+            y: posY / 3,
+            // x: posX - 1000,
+            // y: posY - 150,
+            // x: (posX / ref.current.clientWidth),
+            // y: (posY / ref.current.clientHeight),
             // x:  posX / 4,
             // y: posY / 4,
             // x: (e.clientX / 4.5)  ,
             // y: (e.clientY / 4.5)  ,
-            x: e.clientX / 4,
-            y: e.clientY / 6 ,
+            // x: e.clientX / 4,
+            // y: e.clientY / 6 ,
         });
         };
 
 
 
         useEffect(() => {
-        // window.addEventListener("mousemove", handleMouseMove);
         // handleHoverEffect();
-        ref.current.addEventListener("mousemove", handleMouseMove)
+        // ref.current.addEventListener("mousemove", handleMouseMove)
+        window.addEventListener("mousemove", handleMouseMove);
         return () => {
-            ref.current.removeEventListener("mousemove", handleMouseMove);
+            // ref.current.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("mousemove", handleMouseMove);
+        
         };
         }, []);
 
@@ -105,8 +112,10 @@ function Project_card({project, selectedProyect}) {
             // clipPath: `circle(50% at 100% 100%)`,
             clipPath: `circle(100% at 50% 50%)`,
 
+            // x:position.x - 100,
+            // y:position.y - 100,
             // x:position.x,
-            // y:position.y ,
+            // y:position.y,
         }
     }
 
@@ -153,8 +162,8 @@ function Project_card({project, selectedProyect}) {
             variants={variants}
             animate={cursorVariant}
             transition={{
-                delay: .2,
-                duration: 1,
+                // delay: .2,
+                // duration: 0.5,
                 // ease: "backInOut"
                 ease: "easeInOut",
                 // scale: {

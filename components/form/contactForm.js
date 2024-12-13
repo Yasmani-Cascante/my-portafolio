@@ -69,8 +69,10 @@ const contactForm = () => {
 
             <button 
             type="submit" 
-            className={`${loading ? 'shadow-none border-dashed translate-x-1' : 'shadow-custom'}
-             text-2xl shadow-custom hover:shadow-none hover:translate-x-1 duration-150 h-[54px]`}
+            // className={`${loading ? 'shadow-none border-dashed translate-x-1' : 'shadow-custom'}
+            //  text-2xl shadow-custom hover:shadow-none hover:translate-x-1 duration-150 h-[54px]`}
+             className={`${loading ? 'border-dashed' : 'border'}
+             text-2xl h-[54px] uppercase`}
             disabled={loading ? true : false}>
                 {loading ? <LoadingBtn /> : <span>Send</span>}
             </button>
