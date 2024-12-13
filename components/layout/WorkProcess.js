@@ -51,7 +51,7 @@ function WorkProcess() {
             <div className="container border-x ">
                 <ul className="work_process-list">
 
-                    {Process_data.map( process => (
+                    {Process_data.map( (process, index) => (
                         // <motion.li 
                         // whileHover={() => setPointer('hover')}
                         // onHoverEnd={() => setPointer('hide')}  
@@ -73,7 +73,7 @@ function WorkProcess() {
                         //         </div>
                         //     </div> 
                         // </motion.li>  
-                        <li  >
+                        <li  key={index}>
                             <WorkProcessCard data={process} />
                         </li>  
                        
