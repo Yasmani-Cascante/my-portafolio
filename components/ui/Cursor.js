@@ -13,12 +13,12 @@ import Test  from "../../public/assets/img/Thumbnails/Test.png";
 import ProjectTitle  from "../../public/assets/img/Thumbnails/ProjectTitle.png";
 
 
-
 const Cursor = ({revealProjectThumb}) => {
 
     // Abort if we are in responsive mode 
     // if (typeof navigator !== "undefined" && isMobile()) return null;
 
+    const [mounted, setMounted] = useState(false);
     // Mouse Position
     const [mousePosition, setMousePosition] = useState({ x: "", y: "" });
     // const [linkHovered, setLinkHovered] = useState(false);
@@ -27,17 +27,16 @@ const Cursor = ({revealProjectThumb}) => {
     const [cursorHoverProject, setCursorHoverProject] = useState('hidde');
     const [projectThumb, setProjectThumb] = useState(null);
 
-    
-    // Función para detectar dispositivos móviles
-    // we will not render <Cursor/> on mobile/touch devices.
-    const isMobile = () => {
-        if (typeof navigator === "undefined") return false;
-        const ua = navigator.userAgent;
-        return /Android|Mobi/i.test(ua);
-    };
-
-    // Si es móvil, retornamos null después de los hooks
-    if (isMobile()) return null;
+     // Comprobar si estamos en el lado del cliente
+    useEffect(() => {
+        setMounted(true);
+        
+        // Comprobar si es un dispositivo móvil
+        const isMobile = /Android|Mobi/i.test(navigator.userAgent);
+        if (isMobile) {
+            setMounted(false);
+            return;
+        }
 
     const handleMouseMove = (e) => {
         setMousePosition({
@@ -46,7 +45,7 @@ const Cursor = ({revealProjectThumb}) => {
         });
     };
 
-    
+     window.addEventListener("mousemove", handleMouseMove);
     // useEffect(() => {
     //     window.addEventListener("mousemove", handleMouseMove);
     //     handleHoverEvents();
@@ -57,7 +56,7 @@ const Cursor = ({revealProjectThumb}) => {
     
 
     
-    const handleHoverEvents = () => {
+    const setupHoverEvents  = () => {
 
         const elements = {
             links: document.querySelectorAll("a"),
@@ -71,142 +70,69 @@ const Cursor = ({revealProjectThumb}) => {
             projectCards: document.querySelectorAll(".proyect-card--wrapper")
         };
 
-        // Limpieza de event listeners
-        const cleanup = new Set();
-
-        // Links & buttons hover handle
+    
+        // Event listeners para links
         elements.links.forEach(el => {
-            const mouseOver = () => setCursorVariant('hoverLink');
-            const mouseOut = () => setCursorVariant('initial');
-            el.addEventListener("mouseover", mouseOver);
-            el.addEventListener("mouseout", mouseOut);
-            cleanup.add(() => {
-                el.removeEventListener("mouseover", mouseOver);
-                el.removeEventListener("mouseout", mouseOut);
-            });
+            el.addEventListener("mouseover", () => setCursorVariant('hoverLink'));
+            el.addEventListener("mouseout", () => setCursorVariant('initial'));
         });
-        // Links & buttons hover Handle
-        // document.querySelectorAll("a").forEach(el => {
-        //     el.addEventListener("mouseover", () => setCursorVariant('hoverLink'));
-        //     el.addEventListener("mouseout", () => setCursorVariant('initial'));
-        // });
+
+        // Event listeners para botones
         elements.buttons.forEach(el => {
-            const mouseOver = () => setCursorVariant('hide');
-            const mouseOut = () => setCursorVariant('initial');
-            el.addEventListener("mouseover", mouseOver);
-            el.addEventListener("mouseout", mouseOut);
-            cleanup.add(() => {
-                el.removeEventListener("mouseover", mouseOver);
-                el.removeEventListener("mouseout", mouseOut);
-            });
+            el.addEventListener("mouseover", () => setCursorVariant('hide'));
+            el.addEventListener("mouseout", () => setCursorVariant('initial'));
         });
-        // document.querySelectorAll("button").forEach(el => {
-        //     el.addEventListener("mouseover", () => setCursorVariant('hide'));
-        //     el.addEventListener("mouseout", () => setCursorVariant('initial'));
-        // });
 
-        // const projectLink = document.querySelector("#projectLink");
-        elements.projectLink.addEventListener("mouseover", () => setCursorVariant('hide'));
-        elements.projectLink.addEventListener("mouseout", () => setCursorVariant('initial'));
-        // projectLink.addEventListener("mouseover", () => setCursorVariant('hide'));
-        // projectLink.addEventListener("mouseout", () => setCursorVariant('initial'));
-       
-        // About Photo Cursor hidden
-        //    const aboutImg = document.querySelector('#AboutImg');
-       elements.aboutImg.addEventListener("mouseover", () => setCursorVariant('hide'));
-       elements.aboutImg.addEventListener("mouseout", () => setCursorVariant('initial'));
-       //    aboutImg.addEventListener("mouseover", () => setCursorVariant('hide'))
-       //    aboutImg.addEventListener("mouseout", () => setCursorVariant('initial'))
+        if (elements.projectLink) {
+            elements.projectLink.addEventListener("mouseover", () => setCursorVariant('hide'));
+            elements.projectLink.addEventListener("mouseout", () => setCursorVariant('initial'));
+        }
+      
+        if (elements.aboutImg) {
+            elements.aboutImg.addEventListener("mouseover", () => setCursorVariant('hide'));
+            elements.aboutImg.addEventListener("mouseout", () => setCursorVariant('initial'));
+        }
 
-        // Hamburger Menu hover Handle
-       //    const hamburgerMenu = document.querySelector('.menu-hamburger');
-       elements.hamburgerMenu.addEventListener("mouseover", () => setCursorVariant('hoverLink'))
-       elements.hamburgerMenu.addEventListener("mouseout", () => setCursorVariant('initial'))
+        if (elements.hamburgerMenu) {
+            elements.hamburgerMenu.addEventListener("mouseover", () => setCursorVariant('hoverLink'));
+            elements.hamburgerMenu.addEventListener("mouseout", () => setCursorVariant('initial'));
+        }
        
-        // Click Event Listeners
-        document.addEventListener("mousedown", () => setCursorVariant('click') );
-        document.addEventListener("mouseup", () => setCursorVariant('initial'));
+       // Event listeners globales
+       document.addEventListener("mousedown", () => setCursorVariant('click'));
+       document.addEventListener("mouseup", () => setCursorVariant('initial'));
         
-        // Headers hover Handle
+
         elements.h1s.forEach(el => {
-            const mouseOver = () => setCursorVariant('biggest');
-            const mouseOut = () => setCursorVariant('initial');
-            el.addEventListener("mouseover", mouseOver);
-            el.addEventListener("mouseout", mouseOut);
-            cleanup.add(() => {
-                el.removeEventListener("mouseover", mouseOver);
-                el.removeEventListener("mouseout", mouseOut);
-            });
+            el.addEventListener("mouseover", () => setCursorVariant('biggest'));
+            el.addEventListener("mouseout", () => setCursorVariant('initial'));
         });
-                // document.querySelectorAll("h1").forEach(el => {
-        //     el.addEventListener("mouseover", () => setCursorVariant('biggest'));
-        //     el.addEventListener("mouseout", () => setCursorVariant('initial'));
-        // });
+
         elements.h2s.forEach(el => {
-            const mouseOver = () => setCursorVariant('big');
-            const mouseOut = () => setCursorVariant('initial');
-            el.addEventListener("mouseover", mouseOver);
-            el.addEventListener("mouseout", mouseOut);
-            cleanup.add(() => {
-                el.removeEventListener("mouseover", mouseOver);
-                el.removeEventListener("mouseout", mouseOut);
-            });
+            el.addEventListener("mouseover", () => setCursorVariant('big'));
+            el.addEventListener("mouseout", () => setCursorVariant('initial'));
         });
-        // document.querySelectorAll("h2").forEach(el => {
-        //     el.addEventListener("mouseover", () => setCursorVariant('big'));
-        //     el.addEventListener("mouseout", () => setCursorVariant('initial'));
-        // });
-        
-        // const smile = document.querySelector('.smile');
+  
+        if (elements.smile) {
             elements.smile.addEventListener("mouseover", () => setCursorVariant('big'));
             elements.smile.addEventListener("mouseout", () => setCursorVariant('initial'));
-     //     document.querySelectorAll("div.project-card__header > h3, .poject-card__footer-link").forEach(el => {
-     //         el.addEventListener("mouseover", () => setCursorVariant('hoverLink2'))
-     //         el.addEventListener("mouseout", () => setCursorVariant('initial'))
-     //          el.addEventListener("mouseover", () => setCursorHoverProject('show'));
-     //         el.addEventListener("mouseout", () => setCursorHoverProject('hidde'));
-     //    });
-     //    document.querySelectorAll(".project-card").forEach(el => {
-     //     el.addEventListener("mouseover", () =>{ 
-     //                                             setCursorVariant('hoverProyect')});
-     //     el.addEventListener("mouseout", () => {
-     //                                             setCursorVariant('initial') });
-     //     });
+        }
+  
         elements.projectCards.forEach(el => {
-            const mouseOver = () => setCursorVariant('hoverProyect');
-            const mouseOut = () => setCursorVariant('initial');
-            el.addEventListener("mouseover", mouseOver);
-            el.addEventListener("mouseout", mouseOut);
-            cleanup.add(() => {
-                el.removeEventListener("mouseover", mouseOver);
-                el.removeEventListener("mouseout", mouseOut);
-            });
+            el.addEventListener("mouseover", () => setCursorVariant('hoverProyect'));
+            el.addEventListener("mouseout", () => setCursorVariant('initial'));
         });
-        // document.querySelectorAll(".proyect-card--wrapper").forEach(el => {
-        //     el.addEventListener("mouseover", () =>{ 
-        //                                             setCursorVariant('hoverProyect')
-        //                                             // setviewProjectVariant('show')
-        //                                         });
-        //     el.addEventListener("mouseout", () => {
-        //                                             setCursorVariant('initial')
-        //                                             // setviewProjectVariant('hidde')
-        //                                          });
-        //     });
-        return () => cleanup.forEach(cleanup => cleanup());
     };
-
-
-    useEffect(() => {
-        window.addEventListener("mousemove", handleMouseMove);
-        const cleanupHoverEvents = handleHoverEvents();
-        
-        // Cleanup function
+        setupHoverEvents();
+        // Cleanup
         return () => {
             window.removeEventListener("mousemove", handleMouseMove);
-            cleanupHoverEvents();
+            // Aquí podrías agregar la limpieza de otros event listeners si es necesario
         };
     }, []);
 
+ // No renderizar nada hasta que estemos seguros de que estamos en el cliente
+ if (!mounted) return null;
     
      const variants = {
         initial: {
@@ -430,7 +356,7 @@ const Cursor = ({revealProjectThumb}) => {
 
     }
 
-    const newLocal = null;
+     const newLocal = null;
     return (
         <motion.div
         className="my-cursor rounded-full overflow-visible"
@@ -494,12 +420,13 @@ const Cursor = ({revealProjectThumb}) => {
                 }
                 />  
             </motion.div>
+            //  )}
             : newLocal }
            
 
         </motion.div>
-    )
+    );
  
-}
+};
 
 export default Cursor;
